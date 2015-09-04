@@ -6,8 +6,6 @@
 </head>
 <body>
 <script>
-
-
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '1122565244438826',
@@ -23,6 +21,16 @@
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk')); 
+
+  FB.api(
+      "/me",
+      function (response) {
+        if (response && !response.error) {
+          /* handle the result */
+          console.log(response);
+        }
+      }
+  );
 </script>
 	<div
 	  class="fb-like"
