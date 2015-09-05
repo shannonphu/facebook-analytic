@@ -76,7 +76,7 @@
 				var userID = String(peopleWhoLikeThis[i].id);
 				console.log(userID);
 				var name = getNameFromUserID(userID);
-				console.log(name);
+				//console.log(name);
 				if (!(name in names)) {
 					names.push({
 					    key:   name,
@@ -94,7 +94,7 @@
 
 		FB.api(id, {fields: 'name'}, function(response) {
 			// console.log(id);
-			// console.log(response.name);
+			console.log(response.name);
 			return response.name;
 		});
 
