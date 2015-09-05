@@ -18,12 +18,12 @@
 		});
 
 		FB.login(function(response) {
-		  //console.log(response);
+		  console.log(response);
 
 		  if (response.status=="connected") {
 			console.log("You're logged in");
-//600250886752341
-			FB.api('/990634764290491/posts?limit=100', function(response) {
+
+			FB.api('/600250886752341/posts?limit=100', function(response) {
 			   console.log(response);
 			   postIDs = convertJSONToArray(response);
 			   console.log(postIDs);
@@ -80,11 +80,18 @@
 	}
 
 	function getNameFromUserID(id) {
-		FB.api(id + '?fields=name', function(response) {
+		// FB.api(id + '?fields=name', function(response) {
+		// 	console.log(id);
+		// 	console.log(response);
+		// 	return response.name;
+		// });
+
+		FB.api('id', {fields: 'name'}, function(response) {
 			console.log(id);
 			console.log(response);
-			return response.name;
+			return response;
 		});
+
 	}
 
 
