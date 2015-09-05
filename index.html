@@ -64,6 +64,8 @@
 	}
 
 	function getLikesOfPostWithID(id) {
+		var names = []; 
+
 		FB.api(id + '/likes', function(response) {
 			// store IDs of people who like this post in array
 			var peopleWhoLikeThis = response.data;
@@ -72,24 +74,28 @@
 			for (var i = 0; i < peopleCount; i++) {
 				//console.log(peopleWhoLikeThis[i]);
 				var userID = String(peopleWhoLikeThis[i].id);
-				//console.log(String(userID));
+				console.log(userID);
 				var name = getNameFromUserID(userID);
-				//console.log(name);
+				console.log(name);
+				if (!(name in names)) {
+					names.push({
+					    key:   name,
+					    value: 1
+					});
+				} else {
+					names[name]++;
+				}
 			};
+			console.log(names);
 		});
 	}
 
 	function getNameFromUserID(id) {
-		// FB.api(id + '?fields=name', function(response) {
-		// 	console.log(id);
-		// 	console.log(response);
-		// 	return response.name;
-		// });
 
 		FB.api(id, {fields: 'name'}, function(response) {
-			console.log(id);
-			console.log(response.name);
-			return response;
+			// console.log(id);
+			// console.log(response.name);
+			return response.name;
 		});
 
 	}
