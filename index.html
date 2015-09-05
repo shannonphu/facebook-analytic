@@ -73,10 +73,7 @@
 		  //console.log(peopleWhoLikeThis);
 		  var peopleCount = peopleWhoLikeThis.length;
 		  for (var i = 0; i < peopleCount; i++) {
-		  	//console.log(peopleWhoLikeThis[i]);
 		  	var userID = String(peopleWhoLikeThis[i].id);
-		  	console.log(userID);
-
 		  	getNameFromUserID(userID);
 		  };
 		});
@@ -88,7 +85,8 @@
 			name = response.name;
 			names.push(name);
 			
-			if (!(name in likes)) {
+			if (!(String(name) in likes)) {
+				console.log(name + " already in dict");
 				likes.push({
 				    key:   name,
 				    value: 1
