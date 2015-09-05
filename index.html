@@ -24,9 +24,17 @@
 			console.log("You're loggued in");
 
 			FB.api('/600250886752341/posts?limit=100', function(response) {
-			   console.log(response);
 			   posts = convertJSONToArray(response);
 			   console.log(posts);
+
+			   // if posts not null find out who liked each post
+			   if (posts) {
+			   		var postCount = posts.length;
+			   		for (var i = 0; i < postCount; i++) {
+			   			var postID = postCount[i];
+			   			getLikesOfPostWithID(postID);
+			   		};
+			   }
 			}); 
 
 		  } 
@@ -49,9 +57,27 @@
 		for(var i = 0; i < count; i++) {
 		    var post = data[i];
 		    parsedData.push(post.id);
-		    console.log(post.id);
 		}
 		return parsedData;
+	}
+
+	function getLikesOfPostWithID(id) {
+		FB.api(id + '/likes', function(response) {
+			// store IDs of people who like this post in array
+			var peopleWhoLikeThis = response.data;
+			var peopleCount = peopleWhoLikeThis.length;
+			for (var i = 0; i < peopleCount; i++) {
+				var userID = peopleWhoLikeThis[i].id;
+				var name = getNameFromUserID(userID);
+				console.log(name);
+			};
+		}
+	}
+
+	function getNameFromUserID(id) {
+		FB.api(id, function(response) {
+			return response.name;
+		}
 	}
 
 
