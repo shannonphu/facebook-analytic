@@ -6,8 +6,7 @@
 </head>
 <body>
 <script>
-
-	var posts = [];
+	var names = [];
 
   	window.fbAsyncInit = function() {
 
@@ -23,7 +22,7 @@
 		  if (response.status=="connected") {
 			console.log("You're logged in");
 
-			FB.api('/600250886752341/posts?limit=100', function(response) {
+			FB.api('/600250886752341/posts?limit=100', 'get', {}, function(response) {
 			   console.log(response);
 			   postIDs = convertJSONToArray(response);
 			   console.log(postIDs);
@@ -36,6 +35,7 @@
 			   			var postID = postIDs[i];
 			   			getLikesOfPostWithID(postID);
 			   		};
+			   		console.log(names);
 			   }
 			}); 
 
@@ -66,7 +66,6 @@
 
 
 	function getLikesOfPostWithID(id) {
-		var names = [];
 
 		FB.api(id + '/likes', 'get', { }, function(response) {
 		  var peopleWhoLikeThis = response.data;
@@ -77,10 +76,8 @@
 		  	var userID = String(peopleWhoLikeThis[i].id);
 		  	console.log(userID);
 
-		  	getNameFromUserID(userID, names);
-
+		  	getNameFromUserID(userID);
 		  };
-		  console.log(names);
 		});
 
 		// FB.api(id + '/likes', function(response) {
@@ -101,7 +98,7 @@
 		//return names;
 	}
 
-	function getNameFromUserID(id, names) {
+	function getNameFromUserID(id) {
 		// fill array of names with each user ID
 		FB.api(id, {fields: 'name'}, { }, function(response) {
 			name = response.name;
