@@ -24,14 +24,15 @@
 			console.log("You're loggued in");
 
 			FB.api('/600250886752341/posts?limit=100', function(response) {
-			   posts = convertJSONToArray(response);
-			   console.log(posts);
+			   postIDs = convertJSONToArray(response);
+			   console.log(postIDs);
 
 			   // if posts not null find out who liked each post
-			   if (posts) {
-			   		var postCount = posts.length;
+			   if (postIDs) {
+			   		var postCount = postIDs.length;
+			   		console.log(postCount);
 			   		for (var i = 0; i < postCount; i++) {
-			   			var postID = postCount[i].id;
+			   			var postID = postIDs[i];
 			   			console.log(postID);
 			   			getLikesOfPostWithID(postID);
 			   		};
