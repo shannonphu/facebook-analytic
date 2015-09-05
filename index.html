@@ -21,7 +21,7 @@
 		  console.log(response);
 
 		  if (response.status=="connected") {
-			console.log("You're loggued in");
+			console.log("You're logged in");
 
 			FB.api('/600250886752341/posts?limit=100', function(response) {
 			   postIDs = convertJSONToArray(response);
@@ -73,6 +73,7 @@
 				var userID = peopleWhoLikeThis[i].id;
 				//console.log(String(userID));
 				var name = getNameFromUserID(String(userID));
+				console.log(name);
 			};
 		});
 	}
@@ -81,7 +82,7 @@
 		FB.api(id + '?fields=name', function(response) {
 			console.log(id);
 			console.log(response);
-			return response;
+			return response.name;
 		});
 	}
 
