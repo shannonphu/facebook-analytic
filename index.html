@@ -77,8 +77,7 @@ var names = [];
 		  	var userID = String(peopleWhoLikeThis[i].id);
 		  	console.log(userID);
 
-		  	var name = getNameFromUserID(userID);
-		  	console.log(name);
+		  	getNameFromUserID(userID);
 		  };
 		});
 		console.log(names);
@@ -105,7 +104,7 @@ var names = [];
 		FB.api(id, {fields: 'name'}, { }, function(response) {
 			name = response.name;
 			names.push(name);
-			console.log(name);
+			console.log(names);
 			return name;
 		});
 		// FB.api(id, {fields: 'name'}, function(response) {
@@ -114,7 +113,6 @@ var names = [];
 		// 	name = response.name;
 		// 	names.push(name);
 		// });
-		return name;
 	}
 
 
