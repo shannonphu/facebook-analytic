@@ -72,14 +72,14 @@
 				console.log(peopleWhoLikeThis[i]);
 				var userID = peopleWhoLikeThis[i].id;
 				console.log(String(userID));
-				var name = getNameFromUserID(userID);
+				var name = getNameFromUserID(String(userID));
 				console.log(name);
 			};
 		});
 	}
 
 	function getNameFromUserID(id) {
-		FB.api(String(id), function(response) {
+		FB.api(id, function(response) {
 			return response;
 		});
 	}
