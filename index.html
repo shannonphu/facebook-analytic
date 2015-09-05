@@ -33,7 +33,6 @@
 			   		console.log(postCount);
 			   		for (var i = 0; i < postCount; i++) {
 			   			var postID = postIDs[i];
-			   			console.log(postID);
 			   			getLikesOfPostWithID(postID);
 			   		};
 			   }
@@ -71,6 +70,7 @@
 			var peopleCount = peopleWhoLikeThis.length;
 			for (var i = 0; i < peopleCount; i++) {
 				var userID = peopleWhoLikeThis[i].id;
+				console.log(userID);
 				var name = getNameFromUserID(userID);
 				console.log(name);
 			};
