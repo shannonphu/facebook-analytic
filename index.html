@@ -18,12 +18,13 @@
 		});
 
 		FB.login(function(response) {
-		  console.log(response);
+		  //console.log(response);
 
 		  if (response.status=="connected") {
 			console.log("You're logged in");
 
 			FB.api('/600250886752341/posts?limit=100', function(response) {
+			   console.log(response);
 			   postIDs = convertJSONToArray(response);
 			   console.log(postIDs);
 
