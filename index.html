@@ -66,14 +66,14 @@
 		FB.api(id + '/likes', function(response) {
 			// store IDs of people who like this post in array
 			var peopleWhoLikeThis = response.data;
-			console.log(peopleWhoLikeThis);
+			//console.log(peopleWhoLikeThis);
 			var peopleCount = peopleWhoLikeThis.length;
 			for (var i = 0; i < peopleCount; i++) {
 				console.log(peopleWhoLikeThis[i]);
 				var userID = peopleWhoLikeThis[i].id;
-				console.log(userID);
+				//console.log(userID);
 				var name = getNameFromUserID(userID);
-				console.log(name);
+				//console.log(name);
 			};
 		});
 	}
