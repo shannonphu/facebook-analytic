@@ -6,51 +6,63 @@
 </head>
 <body>
 <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1122565244438826',
-      xfbml      : true,
-      version    : 'v2.4'
-    });
-    var accessToken = 'CAACEdEose0cBAC6CxQuixNVH69OlMd9lOLsZBtc1aoIXa4qKCocmYlEMwfCGcrRY9uDcTODR2NKNw0ZCnnZA2B0dxkLgMztyyBOI0jInx7waa9O7pEH9eGtFsS4zD3puhVWKCub4iH3qgCcf5zJg8DsyvBhZA1anFqtZA4kVsROsnM34OUwg2ZApm20Yc1ZAjbJyp1efvxAkwZDZD';
-    FB.login(function(response) {
-      console.log(response);
-      if (response.status=="connected") {
-        console.log("You're loggued in");
-        FB.api('/600250886752341/posts', function(response) {
-           console.log(response);
-          }); 
-      } 
-    }); 
 
+	var posts = [];
 
-    // FB.api(
-    //     "/me",
-    //     function (response) {
-    //       if (response && !response.error) {
-    //         /* handle the result */
-            
-    //       }
-    //       console.log(response);
-    //     }
-    // );
-  };
+  	window.fbAsyncInit = function() {
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk')); 
+		FB.init({
+		  appId      : '1122565244438826',
+		  xfbml      : true,
+		  version    : 'v2.4'
+		});
+
+		FB.login(function(response) {
+		  console.log(response);
+
+		  if (response.status=="connected") {
+			console.log("You're loggued in");
+
+			FB.api('/600250886752341/posts?limit=100', function(response) {
+			   console.log(response);
+			   posts = convertJSONToArray(response);
+			   console.log(posts);
+			}); 
+
+		  } 
+
+		}); 
+  	};
+
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk')); 
+
+	function convertJSONToArray(json) {
+		var data = json.data;
+		var count = data.length;
+		var parsedData = [];
+		for(var i = 0; i < count; i++) {
+		    var post = data[i];
+		    parsedData.push(post.id);
+		    console.log(post.id);
+		}
+		return parsedData;
+	}
 
 
 </script>
+
 	<div
 	  class="fb-like"
 	  data-share="true"
 	  data-width="450"
 	  data-show-faces="true">
 	</div>
+
 </body>
 </html>
