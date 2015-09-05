@@ -17,10 +17,14 @@
       console.log(response);
       if (response.status=="connected") {
         console.log("You're loggued in");
-        FB.api('/me', function(response) {
-           alert(response.name);
-          }); 
+        // FB.api('/me', function(response) {
+        //    alert(response.name);
+        //   }); 
       } 
+    }); 
+
+    FB.api('/me/conversations', {
+      access_token : accessToken
     });
     // FB.api(
     //     "/me",
