@@ -85,15 +85,15 @@
 			name = response.name;
 			names.push(name);
 			
-			if ('Michelle Dinh' in likes) {
-				console.log("shes already in dict");
-				var numLikes = likes["Michelle Dinh"] + 1;
-				likes[name] = numLikes;
-			} else {
+			if (likes[name] == undefined) {
 				likes.push({
 				    key:   name,
 				    value: 1
 				});
+			} else {
+				console.log(name + "already in dict");
+				var numLikes = likes[name] + 1;
+				likes[name] = numLikes;
 			}
 
 			console.log(names);
