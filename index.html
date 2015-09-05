@@ -64,9 +64,10 @@
 	}
 
 	function getLikesOfPostWithID(id) {
-		var names = []; 
+		
 
 		FB.api(id + '/likes', function(response) {
+			var names = []; 
 			// store IDs of people who like this post in array
 			var peopleWhoLikeThis = response.data;
 			//console.log(peopleWhoLikeThis);
@@ -94,7 +95,7 @@
 			};
 			console.log(names);
 		});
-		return names;
+		
 	}
 
 	// function getNameFromUserID(id) {
