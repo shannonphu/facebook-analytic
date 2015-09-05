@@ -80,20 +80,21 @@
 					// console.log(id);
 					console.log("IN API CALL:" + response.name);
 					name = response.name;
+					if (!(name in names)) {
+						names.push({
+						    key:   name,
+						    value: 1
+						});
+					} else {
+						names[name]++;
+					}
 				});
 				//var name = getNameFromUserID(userID);
-				console.log("OUTSIDE CALL" + name);
-				if (!(name in names)) {
-					names.push({
-					    key:   name,
-					    value: 1
-					});
-				} else {
-					names[name]++;
-				}
+				
 			};
 			console.log(names);
 		});
+		return names;
 	}
 
 	// function getNameFromUserID(id) {
