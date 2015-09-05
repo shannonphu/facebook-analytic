@@ -79,7 +79,7 @@
 	}
 
 	function getNameFromUserID(id) {
-		FB.api(id, function(response) {
+		FB.api(String(id), function(response) {
 			return response;
 		});
 	}
