@@ -86,12 +86,12 @@
 			names.push(name);
 			
 			if (!(String(name) in likes)) {
-				console.log(name + " already in dict");
 				likes.push({
 				    key:   name,
 				    value: 1
 				});
 			} else {
+				console.log(name + " already in dict");
 				likes[name] = ++likes[name];
 			}
 
