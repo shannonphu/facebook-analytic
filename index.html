@@ -17,17 +17,13 @@
       console.log(response);
       if (response.status=="connected") {
         console.log("You're loggued in");
-        // FB.api('/me', function(response) {
-        //    alert(response.name);
-        //   }); 
+        FB.api('/600250886752341/posts', function(response) {
+           alert(response.name);
+          }); 
       } 
     }); 
 
-    FB.api('/600250886752341/posts', {
-      access_token : accessToken
-    }, function(response) {
-    	console.log(response);
-    });
+
     // FB.api(
     //     "/me",
     //     function (response) {
