@@ -102,13 +102,18 @@ var names = [];
 
 	function getNameFromUserID(id) {
 		var name = "no name";
-		FB.api(id, {fields: 'name'}, function(response) {
-			// console.log(id);
-			console.log("response name: " + response.name);
+		FB.api(id, {fields: 'name'}, { }, function(response) {
 			name = response.name;
 			names.push(name);
-		});
-		console.log("outside name: " + name);
+			console.log(name);
+			return name;
+		}
+		// FB.api(id, {fields: 'name'}, function(response) {
+		// 	// console.log(id);
+		// 	console.log("response name: " + response.name);
+		// 	name = response.name;
+		// 	names.push(name);
+		// });
 		return name;
 	}
 
