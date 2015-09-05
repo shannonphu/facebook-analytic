@@ -7,6 +7,7 @@
 <body>
 <script>
 	var names = [];
+	var likes = [];
 
   	window.fbAsyncInit = function() {
 
@@ -86,14 +87,18 @@
 		FB.api(id, {fields: 'name'}, { }, function(response) {
 			name = response.name;
 			names.push(name);
+			
+			if (!likes[name]) {
+				likes.push({
+				    key:   name,
+				    value: 1
+				});
+			} else {
+				likes[name]++;
+			}
+
 			console.log(names);
 		});
-		// FB.api(id, {fields: 'name'}, function(response) {
-		// 	// console.log(id);
-		// 	console.log("response name: " + response.name);
-		// 	name = response.name;
-		// 	names.push(name);
-		// });
 	}
 
 
