@@ -31,7 +31,8 @@
 			   if (posts) {
 			   		var postCount = posts.length;
 			   		for (var i = 0; i < postCount; i++) {
-			   			var postID = postCount[i];
+			   			var postID = postCount[i].id;
+			   			console.log(postID);
 			   			getLikesOfPostWithID(postID);
 			   		};
 			   }
