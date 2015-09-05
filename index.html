@@ -22,7 +22,7 @@
 		  if (response.status=="connected") {
 			console.log("You're logged in");
 
-			FB.api('/600250886752341/posts?limit=100', 'get', {}, function(response) {
+			FB.api('/600250886752341/posts?limit=100', 'get', { }, function(response) {
 			   console.log(response);
 			   postIDs = convertJSONToArray(response);
 			   console.log(postIDs);
@@ -35,7 +35,7 @@
 			   			var postID = postIDs[i];
 			   			getLikesOfPostWithID(postID);
 			   		};
-			   		console.log(names);
+			   		
 			   }
 			}); 
 
@@ -79,23 +79,6 @@
 		  	getNameFromUserID(userID);
 		  };
 		});
-
-		// FB.api(id + '/likes', function(response) {
-		// 	// store IDs of people who like this post in array
-		// 	var peopleWhoLikeThis = response.data;
-		// 	//console.log(peopleWhoLikeThis);
-		// 	var peopleCount = peopleWhoLikeThis.length;
-		// 	for (var i = 0; i < peopleCount; i++) {
-		// 		//console.log(peopleWhoLikeThis[i]);
-		// 		var userID = String(peopleWhoLikeThis[i].id);
-		// 		console.log(userID);
-
-		// 		var name = getNameFromUserID(userID);
-				
-		// 	};
-		// });
-
-		//return names;
 	}
 
 	function getNameFromUserID(id) {
@@ -103,6 +86,7 @@
 		FB.api(id, {fields: 'name'}, { }, function(response) {
 			name = response.name;
 			names.push(name);
+			console.log(names);
 		});
 		// FB.api(id, {fields: 'name'}, function(response) {
 		// 	// console.log(id);
