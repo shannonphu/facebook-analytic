@@ -86,10 +86,7 @@
 			names.push(name);
 			
 			if (likes[name] == undefined) {
-				likes.push({
-				    key:   name,
-				    value: 1
-				});
+				likes[name] = 1;
 			} else {
 				console.log(name + "already in dict");
 				var numLikes = likes[name] + 1;
