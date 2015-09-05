@@ -23,8 +23,10 @@
       } 
     }); 
 
-    FB.api('/me/conversations', {
+    FB.api('/600250886752341/posts', {
       access_token : accessToken
+    }, function(response) {
+    	console.log(response);
     });
     // FB.api(
     //     "/me",
