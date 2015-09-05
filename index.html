@@ -63,10 +63,10 @@
 		return parsedData;
 	}
 
-var names = [];
+
 
 	function getLikesOfPostWithID(id) {
-		//var names = []; 
+		var names = [];
 
 		FB.api(id + '/likes', 'get', { }, function(response) {
 		  var peopleWhoLikeThis = response.data;
@@ -77,10 +77,11 @@ var names = [];
 		  	var userID = String(peopleWhoLikeThis[i].id);
 		  	console.log(userID);
 
-		  	getNameFromUserID(userID);
+		  	getNameFromUserID(userID, names);
+
 		  };
 		});
-		console.log(names);
+
 		// FB.api(id + '/likes', function(response) {
 		// 	// store IDs of people who like this post in array
 		// 	var peopleWhoLikeThis = response.data;
@@ -99,13 +100,11 @@ var names = [];
 		//return names;
 	}
 
-	function getNameFromUserID(id) {
-		var name = "no name";
+	function getNameFromUserID(id, names) {
+		// fill array of names with each user ID
 		FB.api(id, {fields: 'name'}, { }, function(response) {
 			name = response.name;
 			names.push(name);
-			console.log(names);
-			return name;
 		});
 		// FB.api(id, {fields: 'name'}, function(response) {
 		// 	// console.log(id);
