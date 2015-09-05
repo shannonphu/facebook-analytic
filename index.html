@@ -70,11 +70,11 @@
 			//console.log(peopleWhoLikeThis);
 			var peopleCount = peopleWhoLikeThis.length;
 			for (var i = 0; i < peopleCount; i++) {
-				console.log(peopleWhoLikeThis[i]);
-				var userID = peopleWhoLikeThis[i].id;
+				//console.log(peopleWhoLikeThis[i]);
+				var userID = String(peopleWhoLikeThis[i].id);
 				//console.log(String(userID));
-				var name = getNameFromUserID(String(userID));
-				console.log(name);
+				var name = getNameFromUserID(userID);
+				//console.log(name);
 			};
 		});
 	}
@@ -86,7 +86,7 @@
 		// 	return response.name;
 		// });
 
-		FB.api('id', {fields: 'name'}, function(response) {
+		FB.api('id', {fields: 'first_name'}, function(response) {
 			console.log(id);
 			console.log(response);
 			return response;
