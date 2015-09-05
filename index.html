@@ -88,7 +88,7 @@
 			name = response.name;
 			names.push(name);
 			
-			if (!likes[name]) {
+			if (!(name in likes)) {
 				likes.push({
 				    key:   name,
 				    value: 1
