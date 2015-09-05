@@ -78,11 +78,11 @@
 				var name;
 				FB.api(userID, {fields: 'name'}, function(response) {
 					// console.log(id);
-					console.log(response.name);
+					console.log("IN API CALL:" + response.name);
 					name = response.name;
 				});
 				//var name = getNameFromUserID(userID);
-				//console.log(name);
+				console.log("OUTSIDE CALL" + name);
 				if (!(name in names)) {
 					names.push({
 					    key:   name,
@@ -96,15 +96,15 @@
 		});
 	}
 
-	function getNameFromUserID(id) {
-		var name = "no name";
-		FB.api(id, {fields: 'name'}, function(response) {
-			// console.log(id);
-			console.log(response.name);
-			name = response.name;
-		});
-		return name;
-	}
+	// function getNameFromUserID(id) {
+	// 	var name = "no name";
+	// 	FB.api(id, {fields: 'name'}, function(response) {
+	// 		// console.log(id);
+	// 		console.log(response.name);
+	// 		name = response.name;
+	// 	});
+	// 	return name;
+	// }
 
 
 </script>
