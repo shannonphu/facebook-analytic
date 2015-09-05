@@ -12,16 +12,26 @@
       xfbml      : true,
       version    : 'v2.4'
     });
-    FB.api(
-        "/me",
-        function (response) {
-          if (response && !response.error) {
-            /* handle the result */
+    var accessToken = 'CAACEdEose0cBAC6CxQuixNVH69OlMd9lOLsZBtc1aoIXa4qKCocmYlEMwfCGcrRY9uDcTODR2NKNw0ZCnnZA2B0dxkLgMztyyBOI0jInx7waa9O7pEH9eGtFsS4zD3puhVWKCub4iH3qgCcf5zJg8DsyvBhZA1anFqtZA4kVsROsnM34OUwg2ZApm20Yc1ZAjbJyp1efvxAkwZDZD';
+    FB.login(function(response) {
+      console.log(response);
+      if (response.status=="connected") {
+        console.log("You're loggued in");
+        FB.api('/me', function(response) {
+           alert(response.name);
+          }); 
+      } 
+    });
+    // FB.api(
+    //     "/me",
+    //     function (response) {
+    //       if (response && !response.error) {
+    //         /* handle the result */
             
-          }
-          console.log(response);
-        }
-    );
+    //       }
+    //       console.log(response);
+    //     }
+    // );
   };
 
   (function(d, s, id){
