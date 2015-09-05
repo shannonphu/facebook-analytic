@@ -65,6 +65,7 @@
 		FB.api(id + '/likes', function(response) {
 			// store IDs of people who like this post in array
 			var peopleWhoLikeThis = response.data;
+			console.log(peopleWhoLikeThis);
 			var peopleCount = peopleWhoLikeThis.length;
 			for (var i = 0; i < peopleCount; i++) {
 				var userID = peopleWhoLikeThis[i].id;
