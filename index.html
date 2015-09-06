@@ -86,14 +86,14 @@
 			names.push(name);
 			
 			if (likes[name] == undefined) {
-				likes[name] = 1;
+				// likes[name] = 1;
+				likes[name] = { "likes" : 1, "comments" : 0 };
 			} else {
 				console.log(name + "already in dict");
-				var numLikes = likes[name] + 1;
-				likes[name] = numLikes;
+				var numLikes = likes[name][likes] + 1;
+				likes[name][likes] = numLikes;
 			}
 
-			console.log(names);
 			console.log(likes);
 		});
 	}
