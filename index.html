@@ -6,7 +6,7 @@
 </head>
 <body>
 <script>
-	var names = [];
+
 	var members = [];
 
   	window.fbAsyncInit = function() {
@@ -23,23 +23,29 @@
 		  if (response.status=="connected") {
 			console.log("You're logged in");
 
-			FB.api('/600250886752341/posts?limit=100', 'get', { }, function(response) {
-			   console.log(response);
-			   postIDs = convertJSONToArray(response);
-			   console.log(postIDs);
+			var requestURL = '/600250886752341/posts?limit=100';
 
-			   // if posts not null find out who liked each post
-			   if (postIDs) {
-			   		var postCount = postIDs.length;
-			   		console.log(postCount);
-			   		for (var i = 0; i < postCount; i++) {
-			   			var postID = postIDs[i];
-			   			getLikesOfPostWithID(postID);
-			   			getCommentsOfPostWithID(postID);
-			   		};
-			   		
-			   }
-			}); 
+			for (var page = 1; page < 3; page++) {
+				FB.api(requestURL, 'get', { }, function(response) {
+
+				   postIDs = convertJSONToArray(response);
+
+				   // if posts not null find out who liked/commented each post
+				   if (postIDs) {
+				   		var postCount = postIDs.length;
+				   		console.log(postCount);
+				   		for (var i = 0; i < postCount; i++) {
+				   			var postID = postIDs[i];
+				   			getLikesOfPostWithID(postID);
+				   			getCommentsOfPostWithID(postID);
+				   		};
+				   		
+				   }
+
+				   requestURL = response.paging.next;
+
+				});
+			} 
 
 		  } 
 
@@ -78,15 +84,11 @@
 		  	
 		  	FB.api(userID, {fields: 'name'}, { }, function(response) {
 		  		name = response.name;
-		  		names.push(name);
 
 		  		if (members[name] == undefined) {
-		  			// members[name] = 1;
 		  			members[name] = { "likes" : 1, "comments" : 0 };
 		  		} else {
-		  			console.log(name + " already in dict");
 		  			var numLikes = members[name]["likes"] + 1;
-		  			console.log(numLikes);
 		  			members[name]["likes"] = numLikes;
 		  		}
 
@@ -104,19 +106,14 @@
 		  var peopleCount = peopleWhoCommented.length;
 		  for (var i = 0; i < peopleCount; i++) {
 		  	var userID = String(peopleWhoCommented[i].from.id);
-		  	console.log(userID);
 		  	
 		  	FB.api(userID, { }, { }, function(response) {
 		  		name = response.name;
-		  		names.push(name);
 
 		  		if (members[name] == undefined) {
-		  			// members[name] = 1;
 		  			members[name] = { "likes" : 0, "comments" : 1 };
 		  		} else {
-		  			console.log(name + " already in dict");
 		  			var numComments = members[name]["comments"] + 1;
-		  			console.log(numComments);
 		  			members[name]["comments"] = numComments;
 		  		}
 
@@ -126,29 +123,6 @@
 
 		});
 	}
-
-	// function getNameFromUserID(id, fromLike, fromComment) {
-	// 	// fill array of names with each user ID
-	// 	FB.api(id, {fields: 'name'}, { }, function(response) {
-	// 		name = response.name;
-	// 		names.push(name);
-			
-	// 		fromLike = typeof fromLike !== 'undefined' ? fromLike : false;
-	// 		fromComment = typeof fromComment !== 'undefined' ? fromComment : false;
-
-	// 		if (members[name] == undefined) {
-	// 			// members[name] = 1;
-	// 			members[name] = { "likes" : 1, "comments" : 0 };
-	// 		} else {
-	// 			console.log(name + " already in dict");
-	// 			var numLikes = members[name]["likes"] + 1;
-	// 			console.log(numLikes);
-	// 			members[name]["likes"] = numLikes;
-	// 		}
-
-	// 		console.log(members);
-	// 	});
-	// }
 
 
 </script>
