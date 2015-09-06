@@ -47,7 +47,8 @@
 				});
 			} 
 			console.log(members);
-			publish();
+			if (members)
+				publish();
 		  } 
 
 		}); 
@@ -123,11 +124,12 @@
 	}
 
 	function publish() {
+		console.log("ajax" + members);
 		$.ajax({
 		         type: 'post',
 		         url: 'https://script.google.com/macros/s/AKfycbzBiG7RgcSMsCUQgWRCxw8DAHbrCbawJOVfHMb-hdif8sA2zaA/exec',
 		         data: members,
-		         success: alert("posted")
+		         success: alert(members);
 		     });
 	}
 
