@@ -35,6 +35,7 @@
 			   		for (var i = 0; i < postCount; i++) {
 			   			var postID = postIDs[i];
 			   			getLikesOfPostWithID(postID);
+			   			getCommentsOfPostWithID(postID);
 			   		};
 			   		
 			   }
@@ -74,30 +75,80 @@
 		  var peopleCount = peopleWhoLikeThis.length;
 		  for (var i = 0; i < peopleCount; i++) {
 		  	var userID = String(peopleWhoLikeThis[i].id);
-		  	getNameFromUserID(userID);
+		  	
+		  	FB.api(userID, {fields: 'name'}, { }, function(response) {
+		  		name = response.name;
+		  		names.push(name);
+
+		  		if (members[name] == undefined) {
+		  			// members[name] = 1;
+		  			members[name] = { "likes" : 1, "comments" : 0 };
+		  		} else {
+		  			console.log(name + " already in dict");
+		  			var numLikes = members[name]["likes"] + 1;
+		  			console.log(numLikes);
+		  			members[name]["likes"] = numLikes;
+		  		}
+
+		  		console.log(members);
+		  	});
+
 		  };
 		});
 	}
 
-	function getNameFromUserID(id) {
-		// fill array of names with each user ID
-		FB.api(id, {fields: 'name'}, { }, function(response) {
-			name = response.name;
-			names.push(name);
-			
-			if (members[name] == undefined) {
-				// members[name] = 1;
-				members[name] = { "likes" : 1, "comments" : 0 };
-			} else {
-				console.log(name + " already in dict");
-				var numLikes = members[name]["likes"] + 1;
-				console.log(numLikes);
-				members[name]["likes"] = numLikes;
-			}
+	function getCommentsOfPostWithID(id) {
 
-			console.log(members);
+		FB.api(id + '/comments', 'get', { }, function(response) {
+		  var peopleWhoCommented = response.data;
+		  var peopleCount = peopleWhoCommented.length;
+		  for (var i = 0; i < peopleCount; i++) {
+		  	var userID = String(peopleWhoCommented[i].from.id);
+		  	console.log(userID);
+		  	
+		  	FB.api(userID, { }, { }, function(response) {
+		  		name = response.name;
+		  		names.push(name);
+
+		  		if (members[name] == undefined) {
+		  			// members[name] = 1;
+		  			members[name] = { "likes" : 0, "comments" : 1 };
+		  		} else {
+		  			console.log(name + " already in dict");
+		  			var numComments = members[name]["comments"] + 1;
+		  			console.log(numComments);
+		  			members[name]["comments"] = numComments;
+		  		}
+
+		  		console.log(members);
+		  	});
+		  };
+
 		});
 	}
+
+	// function getNameFromUserID(id, fromLike, fromComment) {
+	// 	// fill array of names with each user ID
+	// 	FB.api(id, {fields: 'name'}, { }, function(response) {
+	// 		name = response.name;
+	// 		names.push(name);
+			
+	// 		fromLike = typeof fromLike !== 'undefined' ? fromLike : false;
+	// 		fromComment = typeof fromComment !== 'undefined' ? fromComment : false;
+
+	// 		if (members[name] == undefined) {
+	// 			// members[name] = 1;
+	// 			members[name] = { "likes" : 1, "comments" : 0 };
+	// 		} else {
+	// 			console.log(name + " already in dict");
+	// 			var numLikes = members[name]["likes"] + 1;
+	// 			console.log(numLikes);
+	// 			members[name]["likes"] = numLikes;
+	// 		}
+
+	// 		console.log(members);
+	// 	});
+	// }
 
 
 </script>
