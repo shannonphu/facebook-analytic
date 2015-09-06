@@ -5,6 +5,38 @@
 	<title>Like Tracker</title>
 </head>
 <body>
+	<div id="form" class="contact-us-form">
+	    <div class="title">
+	        <strong>Have any questions?</strong>
+	    </div>
+	    <div class="subtitle">
+	        <strong>Drop us a line</strong>
+	    </div>
+	    <form id="callus" target="_self" onsubmit="" action="javascript: postContactToGoogle()">
+	        <fieldset>
+	            <label for="name">What's your name? *</label>
+	            <input id="name" type="text" name="name">
+	        </fieldset>
+	        <fieldset>
+	            <label for="email">What's your email? *</label>
+	            <input id="email" type="text" name="email">
+	        </fieldset>
+	        <fieldset>
+	            <label for="feed">Questions or Feedback?*</label>
+	            <textarea id="feed" name="feed"></textarea>
+	        </fieldset>
+	        <div style="text-align: right; padding-bottom: 15px;">* Required</div>
+	        <div style="width: 100%; display: block; float: right;">
+	            <button id="send" type="submit">
+	                Contact Us
+	            </button>
+	        </div>
+	        <div style="width: 100%; display: block; float: right; padding-top: 15px;">
+	            <div class="requestSubmited" style="display:none; text-align: center;">Your request has been sent!</div>
+	        </div>
+	    </form>
+	</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 
@@ -132,6 +164,38 @@
 		         success: alert(members)
 		     });
 	}
+
+	function postContactToGoogle(){
+	        var name = $j('#name').val();
+	        var email = $j('#email').val();
+	        var feed = $j('#feed').val();
+	        if ((name !== "") && (email !== "") && ((feed !== "") && (validateEmail(email)))) {
+	            $j.ajax({
+	                url: "https://docs.google.com/spreadsheets/d/1NswdXEilN37h1SqSWrEa5SbdkAWq1xzNaj9h9Lf3o70/pubhtml",
+	                data: {"entry.1" : name, "entry.3" : email, "entry.4": feed},
+	                type: "POST",
+	                dataType: "xml",
+	                statusCode: {
+	                    0: function (){
+	 
+	                        $j('#name').val("");
+	                        $j('#email').val("");
+	                        $j('#feed').val("");
+	                        //Success message
+	                    },
+	                    200: function (){
+	                        $j('#name').val("");
+	                        $j('#email').val("");
+	                        $j('#feed').val("");
+	                        //Success Message
+	                    }
+	                }
+	            });
+	        }
+	        else {
+	            //Error message
+	        }
+	    }
 
 
 </script>
