@@ -90,9 +90,9 @@
 				members[name] = { "likes" : 1, "comments" : 0 };
 			} else {
 				console.log(name + " already in dict");
-				var numLikes = members[name][likes] + 1;
+				var numLikes = members[name]["likes"] + 1;
 				console.log(numLikes);
-				members[name][likes] = numLikes;
+				members[name]["likes"] = numLikes;
 			}
 
 			console.log(members);
