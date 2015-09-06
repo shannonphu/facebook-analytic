@@ -7,7 +7,7 @@
 <body>
 <script>
 	var names = [];
-	var likes = [];
+	var members = [];
 
   	window.fbAsyncInit = function() {
 
@@ -85,17 +85,17 @@
 			name = response.name;
 			names.push(name);
 			
-			if (likes[name] == undefined) {
-				// likes[name] = 1;
-				likes[name] = { "likes" : 1, "comments" : 0 };
+			if (members[name] == undefined) {
+				// members[name] = 1;
+				members[name] = { "likes" : 1, "comments" : 0 };
 			} else {
 				console.log(name + " already in dict");
-				var numLikes = likes[name][likes] + 1;
+				var numLikes = members[name][likes] + 1;
 				console.log(numLikes);
-				likes[name][likes] = numLikes;
+				members[name][likes] = numLikes;
 			}
 
-			console.log(likes);
+			console.log(members);
 		});
 	}
 
