@@ -23,8 +23,6 @@
 		  if (response.status=="connected") {
 			console.log("You're logged in");
 
-			
-
 			for (var offset = 0; offset < 200; offset += 100) {
 				var requestURL = '/600250886752341/posts?limit=100&offset=' + offset;
 				console.log(requestURL);
@@ -121,6 +119,15 @@
 		  };
 
 		});
+	}
+
+	function publish() {
+		$.ajax({
+		         type: 'post',
+		         url: 'https://script.google.com/macros/s/AKfycbzBiG7RgcSMsCUQgWRCxw8DAHbrCbawJOVfHMb-hdif8sA2zaA/exec',
+		         data: members,
+		         success: alert("posted");
+		     });
 	}
 
 
