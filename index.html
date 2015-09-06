@@ -166,9 +166,9 @@
 	}
 
 	function postContactToGoogle(){
-	        var name = $j('#name').val();
-	        var email = $j('#email').val();
-	        var feed = $j('#feed').val();
+	        var name = $('#name').val();
+	        var email = $('#email').val();
+	        var feed = $('#feed').val();
 	        if ((name !== "") && (email !== "") && ((feed !== "") && (validateEmail(email)))) {
 	            $.ajax({
 	                url: "https://docs.google.com/spreadsheets/d/1NswdXEilN37h1SqSWrEa5SbdkAWq1xzNaj9h9Lf3o70/pubhtml",
@@ -178,15 +178,15 @@
 	                statusCode: {
 	                    0: function (){
 	 
-	                        $j('#name').val("");
-	                        $j('#email').val("");
-	                        $j('#feed').val("");
+	                        $('#name').val("");
+	                        $('#email').val("");
+	                        $('#feed').val("");
 	                        //Success message
 	                    },
 	                    200: function (){
-	                        $j('#name').val("");
-	                        $j('#email').val("");
-	                        $j('#feed').val("");
+	                        $('#name').val("");
+	                        $('#email').val("");
+	                        $('#feed').val("");
 	                        //Success Message
 	                    }
 	                }
