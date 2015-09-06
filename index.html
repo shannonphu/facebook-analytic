@@ -89,8 +89,9 @@
 				// likes[name] = 1;
 				likes[name] = { "likes" : 1, "comments" : 0 };
 			} else {
-				console.log(name + "already in dict");
+				console.log(name + " already in dict");
 				var numLikes = likes[name][likes] + 1;
+				console.log(numLikes);
 				likes[name][likes] = numLikes;
 			}
 
