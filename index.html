@@ -38,9 +38,11 @@
 				   			getLikesOfPostWithID(postID);
 				   			getCommentsOfPostWithID(postID);
 				   		};
-				   		requestURL = response.paging.next;
-				   		console.log(requestURL);
+				   		
 				   }
+
+				   requestURL = response.paging.next;
+				   console.log(requestURL);
 
 				});
 			} 
