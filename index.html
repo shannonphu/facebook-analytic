@@ -169,7 +169,7 @@
 	        var name = $('#name').val();
 	        var email = $('#email').val();
 	        var feed = $('#feed').val();
-	        if ((name !== "") && (email !== "") && ((feed !== "") && (validateEmail(email)))) {
+	        if ((name !== "") && (email !== "") && (feed !== "")) {
 	            $.ajax({
 	                url: "https://docs.google.com/spreadsheets/d/1NswdXEilN37h1SqSWrEa5SbdkAWq1xzNaj9h9Lf3o70/pubhtml",
 	                data: {"entry.1" : name, "entry.3" : email, "entry.4": feed},
