@@ -27,7 +27,6 @@
 
 			for (var page = 0; page < 6; page++) {
 				FB.api(requestURL, 'get', { }, function(response) {
-				   console.log(response.data);
 				   postIDs = convertJSONToArray(response);
 
 				   // if posts not null find out who liked/commented each post
@@ -43,9 +42,11 @@
 				   }
 
 				   requestURL = response.paging.next;
+				   console.log(requestURL);
 
 				});
 			} 
+			console.log(members);
 
 		  } 
 
@@ -117,7 +118,6 @@
 		  			members[name]["comments"] = numComments;
 		  		}
 
-		  		console.log(members);
 		  	});
 		  };
 
