@@ -2,9 +2,26 @@
 <html xmlns:fb="https://www.facebook.com/2008/fbml">
 <html>
 <head>
-	<title>Like Tracker</title>
+	<title>MSO Facebook Analytics</title>
 </head>
 <body>
+
+<h1>MSO Facebook Analytics</h1>
+<table>
+	<tr>
+		<td>Name</td>
+		<td>Likes</td>
+		<td>Comments</td>
+	</tr>
+</table>
+
+<style type="text/css">
+	table {
+		width: 100%;
+		text-align: center;
+		border: 1px solid lightgrey;
+	}
+</style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
@@ -25,7 +42,9 @@
 		  if (response.status=="connected") {
 			console.log("You're logged in");
 
-			for (var offset = 0; offset < 200; offset += 100) {
+			var totalPosts = 500;
+
+			for (var offset = 0; offset < totalPosts; offset += 100) {
 				var requestURL = '/600250886752341/posts?limit=100&offset=' + offset;
 				console.log(requestURL);
 
@@ -36,7 +55,6 @@
 				   // if posts not null find out who liked/commented each post
 				   if (postIDs) {
 				   		var postCount = postIDs.length;
-				   		console.log(postCount);
 				   		for (var i = 0; i < postCount; i++) {
 				   			var postID = postIDs[i];
 				   			getLikesOfPostWithID(postID);
@@ -48,6 +66,9 @@
 				});
 			} 
 			console.log(members);
+			if (members.length == totalPosts) {
+				makeTable();
+			}
 		  } 
 
 		}); 
@@ -71,8 +92,6 @@
 		}
 		return parsedData;
 	}
-
-
 
 	function getLikesOfPostWithID(id) {
 
@@ -122,15 +141,27 @@
 		});
 	}
 
+	function makeTable() {
+		for (var key in members) {
+			var name = key;
+			var likes = members[key]["likes"];
+			var comments = members[key]["comments"];
+			addTableRow(name, likes, comments);
+		}
+	}
+
+	function addTableRow(name, likes, comments) {
+		var row = $('<tr></tr>');
+		var n = $('<td>' + name + '</td>');
+		var l = $('<td>' + likes + '</td>');
+		var c = $('<td>' + comments + '</td>');
+		row.append(n);
+		row.append(l);
+		row.append(c);
+		$('table').append(row);
+	}
 
 </script>
-
-	<div
-	  class="fb-like"
-	  data-share="true"
-	  data-width="450"
-	  data-show-faces="true">
-	</div>
 
 </body>
 </html>
