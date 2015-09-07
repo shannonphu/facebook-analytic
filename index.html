@@ -116,7 +116,7 @@ CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao
 	function getLikesOfPostWithID(id) {
 		console.log("entered getLikesOfPostWithID");
 		FB.api(BASE_URL + id + '/likes' + END_URL, 'get', { }, function(response) {
-		  console.log(BASE_URL + id + "/likes");
+		  console.log(BASE_URL + id + "/likes" + END_URL);
 		  var peopleWhoLikeThis = response.data;
 		  console.log(peopleWhoLikeThis);
 		  var peopleCount = peopleWhoLikeThis.length;
@@ -152,7 +152,7 @@ CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao
 		  for (var i = 0; i < peopleCount; i++) {
 		  	var userID = String(peopleWhoCommented[i].from.id);
 		  	
-		  	FB.api(BASE_URL + userID, { }, { }, function(response) {
+		  	FB.api(BASE_URL + userID + END_URL, { }, { }, function(response) {
 		  		name = response.name;
 
 		  		if (members[name] == undefined) {
