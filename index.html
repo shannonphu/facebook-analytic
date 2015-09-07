@@ -150,6 +150,7 @@
 		  		} else {
 		  			var numLikes = members[name]["likes"] + 1;
 		  			members[name]["likes"] = numLikes;
+		  			console.log(name);
 		  			$('#' + name).find('.comments').innerHTML = numLikes;
 		  		}
 		  	});
@@ -198,7 +199,7 @@
 		}
 	}
 
-	function addTableRow(name, likes, comments, name) {
+	function addTableRow(name, likes, comments) {
 		var row = $('<tr id="' + name + '"></tr>');
 		var n = $('<td class="name">' + name + '</td>');
 		var l = $('<td class="likes">' + likes + '</td>');
