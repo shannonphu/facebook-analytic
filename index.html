@@ -85,6 +85,7 @@
 	   				console.log('valid array');
 	   				for (var i = 0; i < postCount; i++) {
 	   					var postID = postIDs[i];
+	   					console.log(postID);
 	   					getLikesOfPostWithID(postID);
 	   					getCommentsOfPostWithID(postID);
 	   				};
@@ -106,17 +107,17 @@
 	}
 
 	function getLikesOfPostWithID(id) {
-
+		console.log("entered getLikesOfPostWithID");
 		FB.api(id + '/likes', 'get', { }, function(response) {
 		  var peopleWhoLikeThis = response.data;
-		  //console.log(peopleWhoLikeThis);
+		  console.log(peopleWhoLikeThis);
 		  var peopleCount = peopleWhoLikeThis.length;
 		  for (var i = 0; i < peopleCount; i++) {
 		  	var userID = String(peopleWhoLikeThis[i].id);
 		  	
 		  	FB.api(userID, {fields: 'name'}, { }, function(response) {
 		  		name = response.name;
-
+		  		console.log(name);
 		  		if (members[name] == undefined) {
 		  			members[name] = { "likes" : 1, "comments" : 0 };
 		  			addTableRow(name, 1, 0);
