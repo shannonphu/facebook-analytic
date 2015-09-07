@@ -1,4 +1,6 @@
-# facebook-sheet
+# Morning Sign Out Facebook Analytic
+
+### License
 The MIT License (MIT)
 
 Copyright (c) [2015] [Shannon Phu]
