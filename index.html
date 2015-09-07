@@ -42,18 +42,19 @@
 		  if (response.status=="connected") {
 			console.log("You're logged in");
 
-			var totalPosts = 500;
+			var totalPosts = 400;
 
 			for (var offset = 0; offset < totalPosts; offset += 100) {
 				var requestURL = '/600250886752341/posts?limit=100&offset=' + offset;
-				console.log(requestURL);
+				
 
 				FB.api(requestURL, 'get', { }, function(response) {
+				   console.log(requestURL);
 				   console.log(response);
 				   postIDs = convertJSONToArray(response);
 
 				   // if posts not null find out who liked/commented each post
-				   if (postIDs) {
+				   if (postIDs != []) {
 				   		var postCount = postIDs.length;
 				   		for (var i = 0; i < postCount; i++) {
 				   			var postID = postIDs[i];
@@ -61,14 +62,13 @@
 				   			getCommentsOfPostWithID(postID);
 				   		};
 				   		
+				   } else {
+				   		console.log('no more posts');
+				   		makeTable();
 				   }
 
 				});
 			} 
-			console.log(members);
-			if (members) {
-				makeTable();
-			}
 		  } 
 
 		}); 
