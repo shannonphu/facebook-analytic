@@ -153,7 +153,7 @@
 		  			members[name]["likes"] = numLikes;
 		  			
 		  			var filteredName = name.replace(/\s+/g, '-').toLowerCase();
-		  			$('#' + filteredName).find('.comments').innerHTML(String(numLikes));
+		  			$('#' + filteredName).find('.comments').text(String(numLikes));
 		  		}
 		  	});
 
@@ -180,7 +180,7 @@
 		  			var numComments = members[name]["comments"] + 1;
 		  			members[name]["comments"] = numComments;
 		  			var filteredName = name.replace(/\s+/g, '-').toLowerCase();
-		  			$('#' + filteredName).find('.likes').innerHTML(String(numComments));
+		  			$('#' + filteredName).find('.likes').text(String(numComments));
 		  		}
 
 		  	});
