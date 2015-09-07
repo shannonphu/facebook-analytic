@@ -8,7 +8,7 @@
 
 <h1>MSO Facebook Analytics</h1>
 <table>
-	<tr>
+	<tr id="head-row">
 		<td>Name</td>
 		<td>Likes</td>
 		<td>Comments</td>
@@ -20,6 +20,22 @@
 		width: 100%;
 		text-align: center;
 		border: 1px solid lightgrey;
+	}
+	table td {
+	    border-top: thin solid; 
+	    border-bottom: thin solid;
+		border-color: lightgrey;
+	}
+
+	table td:first-child {
+	    border-left: thin solid;
+	}
+
+	table td:last-child {
+	    border-right: thin solid;
+	}
+	#head-row {
+		background-color: lightgrey;
 	}
 </style>
 
@@ -148,12 +164,11 @@
 		  			members[name] = { "likes" : 1, "comments" : 0 };
 		  			addTableRow(name, 1, 0);
 		  		} else {
-		  			console.log(name + " already exists");
 		  			var numLikes = members[name]["likes"] + 1;
 		  			members[name]["likes"] = numLikes;
 		  			
 		  			var filteredName = name.replace(/\s+/g, '-').toLowerCase();
-		  			$('#' + filteredName).find('.comments').text(String(numLikes));
+		  			$('#' + filteredName).find('.likes').text(String(numLikes));
 		  		}
 		  	});
 
@@ -176,11 +191,10 @@
 		  			members[name] = { "likes" : 0, "comments" : 1 };
 		  			addTableRow(name, 0, 1);
 		  		} else {
-		  			console.log(name + " already exists");
 		  			var numComments = members[name]["comments"] + 1;
 		  			members[name]["comments"] = numComments;
 		  			var filteredName = name.replace(/\s+/g, '-').toLowerCase();
-		  			$('#' + filteredName).find('.likes').text(String(numComments));
+		  			$('#' + filteredName).find('.comments').text(String(numComments));
 		  		}
 
 		  	});
