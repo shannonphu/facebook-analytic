@@ -69,7 +69,8 @@
 		   postIDs = convertJSONToArray(response);
 
 		   // if posts not null find out who liked/commented each post
-		   if (postIDs != []) {
+		   if (postIDs.length) {
+		   		console.log('valid array');
 		   		var postCount = postIDs.length;
 		   		for (var i = 0; i < postCount; i++) {
 		   			var postID = postIDs[i];
