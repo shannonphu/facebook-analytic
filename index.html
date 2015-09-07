@@ -110,6 +110,7 @@
 	function getLikesOfPostWithID(id) {
 		console.log("entered getLikesOfPostWithID");
 		FB.api(BASE_URL + id + '/likes', 'get', { }, function(response) {
+		  console.log(BASE_URL + id + "/likes");
 		  var peopleWhoLikeThis = response.data;
 		  console.log(peopleWhoLikeThis);
 		  var peopleCount = peopleWhoLikeThis.length;
