@@ -42,13 +42,17 @@
 		  if (response.status=="connected") {
 			console.log("You're logged in");
 
-			var totalPosts = 400;
+			// var totalPosts = 400;
 
-			for (var offset = 0; offset < totalPosts; offset += 100) {
-				var requestURL = '/600250886752341/posts?limit=100&offset=' + offset;
+			// for (var offset = 0; offset < totalPosts; offset += 100) {
+			// 	var requestURL = '/600250886752341/posts?limit=100&offset=' + offset;
 				
-				request(requestURL);
-			} 
+			// 	// request for posts with some offset
+			// 	request(requestURL);
+			// } 
+
+			request1();
+
 		  } 
 
 		}); 
@@ -67,26 +71,54 @@
 		   console.log(requestURL);
 		   console.log(response);
 
-		   // if there is data returned from Facebook
+		   // if there is post data returned from Facebook
 		   if (response.data.length > 0) {
 		   		var postIDs = convertJSONToArray(response);
+		   		console.log(postIDs);
 
 		   		// if there are postIDs find out who liked/commented each post
 		   		var postCount = postIDs.length;
 		   		if (postCount > 0) {
-		   				console.log('valid array');
-		   				for (var i = 0; i < postCount; i++) {
-		   					var postID = postIDs[i];
-		   					getLikesOfPostWithID(postID);
-		   					getCommentsOfPostWithID(postID);
-		   				};
+	   				console.log('valid array');
+	   				for (var i = 0; i < postCount; i++) {
+	   					var postID = postIDs[i];
+	   					getLikesOfPostWithID(postID);
+	   					getCommentsOfPostWithID(postID);
+	   				};
 		   				
 		   		} 
 		   } else {
    				console.log('no more posts');
    				makeTable();
-	   		}
+	   	   }
 
+		});
+	}
+
+	function request1() {
+		
+		FB.api('/600250886752341/posts?limit=100', 'get', { }, function(response) {
+		   console.log(requestURL);
+		   console.log(response);
+
+		   // if there is post data returned from Facebook
+		   if (response.data.length > 0) {
+		   		var postIDs = convertJSONToArray(response);
+		   		console.log(postIDs);
+
+		   		// if there are postIDs find out who liked/commented each post
+		   		var postCount = postIDs.length;
+		   		if (postCount > 0) {
+	   				console.log('valid array');
+	   				for (var i = 0; i < postCount; i++) {
+	   					var postID = postIDs[i];
+	   					getLikesOfPostWithID(postID);
+	   					getCommentsOfPostWithID(postID);
+	   				};
+		   				
+		   		} 
+		   }
+		   makeTable();
 		});
 	}
 
