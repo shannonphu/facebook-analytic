@@ -182,11 +182,14 @@
 
 	function makeTable() {
 		console.log("make table");
+		console.log(members);
 		for (var key in members) {
+			console.log(key);
+			
 			var name = key;
 			var likes = members[key]["likes"];
 			var comments = members[key]["comments"];
-			console.log(key);
+			
 			addTableRow(name, likes, comments);
 		}
 	}
