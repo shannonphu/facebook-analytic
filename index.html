@@ -148,10 +148,12 @@
 		  			members[name] = { "likes" : 1, "comments" : 0 };
 		  			addTableRow(name, 1, 0);
 		  		} else {
+		  			console.log(name + " already exists");
 		  			var numLikes = members[name]["likes"] + 1;
 		  			members[name]["likes"] = numLikes;
-		  			console.log(name);
-		  			$('#' + name).find('.comments').innerHTML = numLikes;
+		  			
+		  			var filteredName = name.replace(/\s+/g, '-').toLowerCase();
+		  			$('#' + filteredName).find('.comments').innerHTML = String(numLikes);
 		  		}
 		  	});
 
@@ -174,9 +176,11 @@
 		  			members[name] = { "likes" : 0, "comments" : 1 };
 		  			addTableRow(name, 0, 1);
 		  		} else {
+		  			console.log(name + " already exists");
 		  			var numComments = members[name]["comments"] + 1;
 		  			members[name]["comments"] = numComments;
-		  			$('#' + name).find('.likes').innerHTML = numComments;
+		  			var filteredName = name.replace(/\s+/g, '-').toLowerCase();
+		  			$('#' + filteredName).find('.likes').innerHTML = String(numComments);
 		  		}
 
 		  	});
@@ -200,7 +204,8 @@
 	}
 
 	function addTableRow(name, likes, comments) {
-		var row = $('<tr id="' + name + '"></tr>');
+		var filteredName = name.replace(/\s+/g, '-').toLowerCase();
+		var row = $('<tr id="' + filteredName + '"></tr>');
 		var n = $('<td class="name">' + name + '</td>');
 		var l = $('<td class="likes">' + likes + '</td>');
 		var c = $('<td class="comments">' + comments + '</td>');
