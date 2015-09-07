@@ -31,6 +31,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
+	var BASE_URL = 'https://graph.facebook.com';
 
 	var members = [];
 
@@ -108,14 +109,15 @@
 
 	function getLikesOfPostWithID(id) {
 		console.log("entered getLikesOfPostWithID");
-		FB.api(id + '/likes', 'get', { }, function(response) {
+		FB.api(BASE_URL + '/' + id + '/likes', 'get', { }, function(response) {
+		  console.log(response);
 		  var peopleWhoLikeThis = response.data;
 		  console.log(peopleWhoLikeThis);
 		  var peopleCount = peopleWhoLikeThis.length;
 		  for (var i = 0; i < peopleCount; i++) {
 		  	var userID = String(peopleWhoLikeThis[i].id);
 		  	
-		  	FB.api(userID, {fields: 'name'}, { }, function(response) {
+		  	FB.api(BASE_URL + userID, {fields: 'name'}, { }, function(response) {
 		  		name = response.name;
 		  		console.log(name);
 		  		if (members[name] == undefined) {
@@ -137,13 +139,13 @@
 
 	function getCommentsOfPostWithID(id) {
 
-		FB.api(id + '/comments', 'get', { }, function(response) {
+		FB.api(BASE_URL + id + '/comments', 'get', { }, function(response) {
 		  var peopleWhoCommented = response.data;
 		  var peopleCount = peopleWhoCommented.length;
 		  for (var i = 0; i < peopleCount; i++) {
 		  	var userID = String(peopleWhoCommented[i].from.id);
 		  	
-		  	FB.api(userID, { }, { }, function(response) {
+		  	FB.api(BASE_URL + '/' + userID, { }, { }, function(response) {
 		  		name = response.name;
 
 		  		if (members[name] == undefined) {
