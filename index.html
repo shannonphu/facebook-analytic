@@ -88,7 +88,6 @@
 	   					getLikesOfPostWithID(postID);
 	   					getCommentsOfPostWithID(postID);
 	   				};
-		   				
 		   		} 
 		   }
 
@@ -160,20 +159,6 @@
 		  };
 
 		});
-	}
-
-	function makeTable() {
-		console.log("make table");
-		console.log(members);
-		for (var key in members) {
-			console.log(key);
-
-			var name = key;
-			var likes = members[key]["likes"];
-			var comments = members[key]["comments"];
-			
-			addTableRow(name, likes, comments);
-		}
 	}
 
 	function addTableRow(name, likes, comments) {
