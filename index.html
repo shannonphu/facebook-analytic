@@ -58,7 +58,7 @@ CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao
 			var totalPosts = 400;
 
 			for (var offset = 0; offset < totalPosts; offset += 100) {
-				var requestURL = '/600250886752341/posts?limit=100&offset=' + offset + END_URL;
+				var requestURL = BASE_URL + '600250886752341/posts?limit=100&offset=' + offset + END_URL;
 				
 				// request for posts with some offset
 				request(requestURL);
