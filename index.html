@@ -47,27 +47,7 @@
 			for (var offset = 0; offset < totalPosts; offset += 100) {
 				var requestURL = '/600250886752341/posts?limit=100&offset=' + offset;
 				
-
-				FB.api(requestURL, 'get', { }, function(response) {
-				   console.log(requestURL);
-				   console.log(response);
-				   postIDs = convertJSONToArray(response);
-
-				   // if posts not null find out who liked/commented each post
-				   if (postIDs != []) {
-				   		var postCount = postIDs.length;
-				   		for (var i = 0; i < postCount; i++) {
-				   			var postID = postIDs[i];
-				   			getLikesOfPostWithID(postID);
-				   			getCommentsOfPostWithID(postID);
-				   		};
-				   		
-				   } else {
-				   		console.log('no more posts');
-				   		makeTable();
-				   }
-
-				});
+				request(requestURL);
 			} 
 		  } 
 
@@ -81,6 +61,29 @@
 		js.src = "//connect.facebook.net/en_US/sdk.js";
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk')); 
+
+	function request(requestURL) {
+		FB.api(requestURL, 'get', { }, function(response) {
+		   console.log(requestURL);
+		   console.log(response);
+		   postIDs = convertJSONToArray(response);
+
+		   // if posts not null find out who liked/commented each post
+		   if (postIDs != []) {
+		   		var postCount = postIDs.length;
+		   		for (var i = 0; i < postCount; i++) {
+		   			var postID = postIDs[i];
+		   			getLikesOfPostWithID(postID);
+		   			getCommentsOfPostWithID(postID);
+		   		};
+		   		
+		   } else {
+		   		console.log('no more posts');
+		   		makeTable();
+		   }
+
+		});
+	}
 
 	function convertJSONToArray(json) {
 		var data = json.data;
