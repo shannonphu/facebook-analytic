@@ -66,23 +66,26 @@
 		FB.api(requestURL, 'get', { }, function(response) {
 		   console.log(requestURL);
 		   console.log(response);
+
+		   // if there is data returned from Facebook
 		   if (response.data.length > 0) {
-		   		postIDs = convertJSONToArray(response);
-		   }
-		   // if posts not null find out who liked/commented each post
-		   var postCount = postIDs.length;
-		   if (postCount > 0) {
-		   		console.log('valid array');
-		   		for (var i = 0; i < postCount; i++) {
-		   			var postID = postIDs[i];
-		   			getLikesOfPostWithID(postID);
-		   			getCommentsOfPostWithID(postID);
-		   		};
-		   		
+		   		var postIDs = convertJSONToArray(response);
+
+		   		// if there are postIDs find out who liked/commented each post
+		   		var postCount = postIDs.length;
+		   		if (postCount > 0) {
+		   				console.log('valid array');
+		   				for (var i = 0; i < postCount; i++) {
+		   					var postID = postIDs[i];
+		   					getLikesOfPostWithID(postID);
+		   					getCommentsOfPostWithID(postID);
+		   				};
+		   				
+		   		} 
 		   } else {
-		   		console.log('no more posts');
-		   		makeTable();
-		   }
+   				console.log('no more posts');
+   				makeTable();
+	   		}
 
 		});
 	}
@@ -147,6 +150,7 @@
 	}
 
 	function makeTable() {
+		console.log("make table");
 		for (var key in members) {
 			var name = key;
 			var likes = members[key]["likes"];
