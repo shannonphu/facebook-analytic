@@ -29,9 +29,15 @@
 	}
 </style>
 
+
+
+<!-- Never expire access token for MSO
+CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao8SRTX57kNtdu0Q4LFk0yOwF1PwdNHupNbAvGkxcFtUgigJhHlv45IR8ZAuh0jjs74MCDtzLBrtOOadjVQpF6dBmwLpevgC07ufDfzDStH5BKZC4gPEZD -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 	var BASE_URL = 'https://graph.facebook.com/';
+	var END_URL = '?access_token=CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao8SRTX57kNtdu0Q4LFk0yOwF1PwdNHupNbAvGkxcFtUgigJhHlv45IR8ZAuh0jjs74MCDtzLBrtOOadjVQpF6dBmwLpevgC07ufDfzDStH5BKZC4gPEZD'
 
 	var members = [];
 
@@ -52,7 +58,7 @@
 			var totalPosts = 400;
 
 			for (var offset = 0; offset < totalPosts; offset += 100) {
-				var requestURL = '/600250886752341/posts?limit=100&offset=' + offset;
+				var requestURL = '/600250886752341/posts?limit=100&offset=' + offset + END_URL;
 				
 				// request for posts with some offset
 				request(requestURL);
@@ -72,7 +78,7 @@
 	}(document, 'script', 'facebook-jssdk')); 
 
 	function request(requestURL) {
-		FB.api(requestURL, 'get', { }, function(response) {
+		FB.api(requestURL + END_URL, 'get', { }, function(response) {
 		   console.log(requestURL);
 		   console.log(response);
 
@@ -109,7 +115,7 @@
 
 	function getLikesOfPostWithID(id) {
 		console.log("entered getLikesOfPostWithID");
-		FB.api(BASE_URL + id + '/likes', 'get', { }, function(response) {
+		FB.api(BASE_URL + id + '/likes' + END_URL, 'get', { }, function(response) {
 		  console.log(BASE_URL + id + "/likes");
 		  var peopleWhoLikeThis = response.data;
 		  console.log(peopleWhoLikeThis);
@@ -118,7 +124,7 @@
 		  for (var i = 0; i < peopleCount; i++) {
 		  	var userID = String(peopleWhoLikeThis[i].id);
 		  	
-		  	FB.api(BASE_URL + userID, {fields: 'name'}, { }, function(response) {
+		  	FB.api(BASE_URL + userID + END_URL, {fields: 'name'}, { }, function(response) {
 		  		name = response.name;
 		  		console.log(name);
 		  		if (members[name] == undefined) {
@@ -140,7 +146,7 @@
 
 	function getCommentsOfPostWithID(id) {
 
-		FB.api(BASE_URL + id + '/comments', 'get', { }, function(response) {
+		FB.api(BASE_URL + id + '/comments' + END_URL, 'get', { }, function(response) {
 		  var peopleWhoCommented = response.data;
 		  var peopleCount = peopleWhoCommented.length;
 		  for (var i = 0; i < peopleCount; i++) {
