@@ -37,7 +37,8 @@ CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 	var BASE_URL = 'https://graph.facebook.com/';
-	var END_URL = '&access_token=CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao8SRTX57kNtdu0Q4LFk0yOwF1PwdNHupNbAvGkxcFtUgigJhHlv45IR8ZAuh0jjs74MCDtzLBrtOOadjVQpF6dBmwLpevgC07ufDfzDStH5BKZC4gPEZD'
+	var END_URL_1 = '&access_token=CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao8SRTX57kNtdu0Q4LFk0yOwF1PwdNHupNbAvGkxcFtUgigJhHlv45IR8ZAuh0jjs74MCDtzLBrtOOadjVQpF6dBmwLpevgC07ufDfzDStH5BKZC4gPEZD';
+	var END_URL_2 = '?access_token=CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao8SRTX57kNtdu0Q4LFk0yOwF1PwdNHupNbAvGkxcFtUgigJhHlv45IR8ZAuh0jjs74MCDtzLBrtOOadjVQpF6dBmwLpevgC07ufDfzDStH5BKZC4gPEZD';
 
 	var members = [];
 
@@ -58,7 +59,7 @@ CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao
 			var totalPosts = 400;
 
 			for (var offset = 0; offset < totalPosts; offset += 100) {
-				var requestURL = BASE_URL + '600250886752341/posts?limit=100&offset=' + offset + END_URL;
+				var requestURL = BASE_URL + '600250886752341/posts?limit=100&offset=' + offset + END_URL_1;
 				
 				// request for posts with some offset
 				request(requestURL);
@@ -78,7 +79,7 @@ CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao
 	}(document, 'script', 'facebook-jssdk')); 
 
 	function request(requestURL) {
-		FB.api(requestURL + END_URL, 'get', { }, function(response) {
+		FB.api(requestURL + END_URL_1, 'get', { }, function(response) {
 		   console.log(requestURL);
 		   console.log(response);
 
@@ -115,8 +116,8 @@ CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao
 
 	function getLikesOfPostWithID(id) {
 		console.log("entered getLikesOfPostWithID");
-		FB.api(BASE_URL + id + '/likes' + END_URL, 'get', { }, function(response) {
-		  console.log(BASE_URL + id + "/likes" + END_URL);
+		FB.api(BASE_URL + id + '/likes' + END_URL_2, 'get', { }, function(response) {
+		  console.log(BASE_URL + id + "/likes" + END_URL_2);
 		  var peopleWhoLikeThis = response.data;
 		  console.log(peopleWhoLikeThis);
 		  var peopleCount = peopleWhoLikeThis.length;
@@ -124,7 +125,7 @@ CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao
 		  for (var i = 0; i < peopleCount; i++) {
 		  	var userID = String(peopleWhoLikeThis[i].id);
 		  	
-		  	FB.api(BASE_URL + userID + END_URL, {fields: 'name'}, { }, function(response) {
+		  	FB.api(BASE_URL + userID + END_URL_2, {fields: 'name'}, { }, function(response) {
 		  		name = response.name;
 		  		console.log(name);
 		  		if (members[name] == undefined) {
@@ -146,13 +147,13 @@ CAAP895ahySoBAFBZBnf1t221y0dQfnLUaP5X7BUZCvaZAZCH42To2MnEyw489bSD1NMywRLyAMkq1Ao
 
 	function getCommentsOfPostWithID(id) {
 
-		FB.api(BASE_URL + id + '/comments' + END_URL, 'get', { }, function(response) {
+		FB.api(BASE_URL + id + '/comments' + END_URL_2, 'get', { }, function(response) {
 		  var peopleWhoCommented = response.data;
 		  var peopleCount = peopleWhoCommented.length;
 		  for (var i = 0; i < peopleCount; i++) {
 		  	var userID = String(peopleWhoCommented[i].from.id);
 		  	
-		  	FB.api(BASE_URL + userID + END_URL, { }, { }, function(response) {
+		  	FB.api(BASE_URL + userID + END_URL_2, { }, { }, function(response) {
 		  		name = response.name;
 
 		  		if (members[name] == undefined) {
