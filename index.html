@@ -78,7 +78,6 @@
 		   // if there is post data returned from Facebook
 		   if (response.data.length > 0) {
 		   		var postIDs = convertJSONToArray(response);
-		   		console.log(postIDs);
 
 		   		// if there are postIDs find out who liked/commented each post
 		   		var postCount = postIDs.length;
@@ -91,10 +90,7 @@
 	   				};
 		   				
 		   		} 
-		   } else {
-   				console.log('no more posts');
-   				makeTable();
-	   	   }
+		   }
 
 		});
 	}
@@ -130,6 +126,7 @@
 		  			members[name]["likes"] = numLikes;
 		  			
 		  			var filteredName = name.replace(/\s+/g, '-').toLowerCase();
+		  			console.log(filteredName);
 		  			$('#' + filteredName).find('.likes').text(String(numLikes));
 		  		}
 		  	});
@@ -180,6 +177,7 @@
 	}
 
 	function addTableRow(name, likes, comments) {
+		console.log("add table row");
 		var filteredName = name.replace(/\s+/g, '-').toLowerCase();
 		var row = $('<tr id="' + filteredName + '"></tr>');
 		var n = $('<td class="name">' + name + '</td>');
